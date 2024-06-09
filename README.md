@@ -1,11 +1,13 @@
 
-# Making your first Rocket League ML bot using RLGym-PPO
+# Thou art in need of seizing such– To craft thy own a bot?
 
-This guide will explain how to get started with RLGym-PPO, a very nice and easy-to-use learning framework for making Rocket League bots. I will explain what all of the settings in `example.py` do, and various recommendations.
+Luck findeth thee, as Lady is oft 'pon search; for thou didst find, amongst the drivel, wealth. Upon this page below lay secrets untold: and near shalt thou be learnt within the ways of creation. Wherefore– asketh thee– shouldst this work beest writ in olden tongue? To rise o'er rivals: those of feeble, modern slang; and to reacheth literary excellence upon this day! Recall, doth thee, the poets of fusty? Aye, thee doth: for their works still art readeth the present day, and their po'ers unbest yet.
 
-*DISCLAIMER: The recommendations I will give are based on of my personal experience, as well as what I have learned from talking to and reading the code of other bot creators. I am definitely no expert, and my experience is limited to just a few bots, so some things might not apply as well to yours. Experiment and see what works best! That's usually the only way to actually know.*
+Within this guide shalt thou beest soon taught ways of RLGym-PPO: a tool f'r layman, in creation of bots their own. I bid thee, view the sooth of such knobs and dials, those of `example.py`, and take unto thineself varied advice.
 
-*If you notice a mistake in this guide, let me know!*
+**QUITCLAIM:** **Such advice as I may give sits upon naught but mastery of my person, and so too that which hath been impart from others; learnt from deciphering the writ and work of my peers. No master shall claim I to be– nay! My experience is limited to nay more than few; thusly, it may be thy bot shalt not tak'st my advice well. Crafteth bots thy own; and with such, crafteth too thy own custom of creation! There 'tis oft no alt for wish of know.*
+
+*If thou takest note a mistake, t'would marry be kind to takest upon thyself the role a notecarer.*
 
 ## Prerequisites
 This guide assumes you have some basic Python experience. If you are coming from another language, that's fine too, but you might need to google some basic stuff and watch a few tutorials along the way.
