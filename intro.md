@@ -1,25 +1,30 @@
+# Introduction Making your first Rocket League ML bot using RLGym-PPO
+
+This guide will explain how to get started with RLGym-PPO, a very nice and easy-to-use learning framework for making Rocket League bots. I will explain what all of the settings in `example.py` do, and give various recommendations.
+
+*DISCLAIMER: The recommendations I will give are based on my personal experience, as well as what I have learned from talking to and reading the code of other bot creators. I am definitely no expert, and my experience is limited to just a few bots, so some things might not apply as well to yours. Experiment and see what works best! That's usually the only way to actually know.*
+
+*If you notice a mistake in this guide, let me know!*
+
+## Prerequisites
+This guide assumes you have some basic Python experience. If you are coming from another language, that's fine too, but you might need to google some basic stuff and watch a few tutorials along the way.
+I won't hand-hold basic Python tasks like adding an import or making a function, nor will I explain what an argument or constructor is. If you don't know, google it!
+
+This guide also assumes you know the basics of Rocket League. If you don't know what Rocket League is, I have no idea how you got here.
+
+You don't need any prior experience in machine learning, and this guide will assume you don't. If you already know some of the things I will explain, feel free to skip ahead.
+
 # Introduction
 
 ## Installing RLGym-PPO and rlgym-sim:
-Here are the steps to install everything needed:
-*Skip a step if you already have the thing!*
-1. Install [Python](https://www.python.org/downloads/) (make sure to add it to your PATH/environment variables)
-2. Install [Git](https://git-scm.com/downloads) (you can just click through the install with all of the default settings)
-3. Install the `RocketSim` package with `pip install rocketsim`
-4. Install the `rlgym_sim` package with `pip install git+https://github.com/AechPro/rocket-league-gym-sim@main`
-5. [Download the asset dumper](https://github.com/ZealanL/RLArenaCollisionDumper/releases/tag/v1.0.0) and [follow its usage instructions](https://github.com/ZealanL/RLArenaCollisionDumper/blob/main/README.md) to make the `collision_meshes` folder (we will move this later)
-6. If you have an NVIDIA GPU, install [CUDA v11.8](https://developer.nvidia.com/cuda-11-8-0-download-archive)
-7. Install PyTorch from [its website](https://pytorch.org/get-started/locally/) (if you installed CUDA, select the CUDA version, otherwise select CPU)
-8. Make a folder for your bot
-9. Install RLGym-PPO with `pip install git+https://github.com/AechPro/rlgym-ppo`
-10. Steal [example.py](https://github.com/AechPro/rlgym-ppo/blob/main/example.py) from RLGym-PPO and add it to your bot folder
-11. Move `collision_meshes` to your bot folder
+Follow the instructions on https://github.com/AechPro/rlgym-ppo/blob/main/README.md.
+If you have an NVIDIA GPU, you should definitely install PyTorch with GPU support, because it will greatly speed up training.
 
-### Wait, where is Rocket League involved?
+### Wait where is Rocket League involved?
 RLGym-PPO uses rlgym-sim, which is a version of RLGym that runs on a simulated version of Rocket League, without actually running the game itself. This means that you can use RLGym-PPO on non-windows platforms, without having Rocket League, and can also collect data from the game much faster.
 
 ## Actually running your bot
-Once you have installed RLGym-PPO, you can run your bot by running `example.py` (you should do this through a command prompt, instead of double-clicking).
+Once you have installed RLGym-PPO, you can run your bot by running `example.py`.
 
 This will start training the bot, and will report its results to *wandb*, a data platform that you can use to see graphs of various info as your bot trains. It will also print out a big list of stuff into the console, which I will elaborate on more in the next section.
 
@@ -28,7 +33,7 @@ Training is a process of:
  - **Collection**: The bot collects data from the environment (i.e. the bot plays the game at super-speed). Each data point during gameplay is called a **step**.
  - **Learning**: The learning algorithm uses those collected steps to update the brain of the bot.
 
-Every time this cycle of learning happens it is called an **iteration**. After each iteration, the bot will print out a report, which will look something like this:
+ Each of these learning cycles are called an **iteration**. After each iteration, the bot will print out a report, which will look something like this:
 
 ```
 --------BEGIN ITERATION REPORT--------
@@ -92,14 +97,14 @@ By default, your bot has 3 rewards:
 
 *You can find these rewards in `example.py`.*
 
-As your bot continuous to mash random inputs, it will accidentally trigger a reward or punishment. Then, during the learning phase, the learning algorithm will try to adjust the bot's brain such that it is more/less likely to do the things that were rewarded/punished.
+As your bot continues to mash random inputs, it will accidentally trigger a reward or punishment. Then, during the learning phase, the learning algorithm will try to adjust the bot's brain such that it is more/less likely to do the things that were rewarded/punished.
 
 ### Wait, why don't we just have a goal reward?
 If you think about it, the only thing that ultimately matters for winning a game of Rocket League is scoring and not getting scored on, so why do we need other rewards?
 
 Well, the answer is that bots are not very smart compared to humans. They can't plan out what they want to do, nor do they know what a car is, nor have they ever heard of balls or goals before. They need a lot more specific encouragement to learn how to move towards the ball, hit the ball, collect boost, and so on. 
 
-A lot of the difficulty of making a bot is creating rewards that encourage the bot to do what you want, without limiting its ability to explore other options.
+A lot of the difficulty of making a bot is creating rewards that encourage the bot to do what you want without limiting its ability to explore other options.
 
 Also, for future reference, when I say **resetting the bot**, I mean resetting all learning back to nothing. Resetting the bot is a good choice for a number of reasons, and usually occurs when the bot is not improving, or a significant change needs to be made that would break the current bot.
 
@@ -118,7 +123,7 @@ This is set at the line:
 action_parser = ContinuousAction()
 ```
 
-**Continuous** **actions** means the bot can use any partial input, which allows for more precise input. However, this is more difficult to use, and I do not recommend it as your first action parser.
+**Continuous** **actions** mean the bot can use any partial input, which allows for more precise input. However, this is more difficult to use, and I do not recommend it as your first action parser.
 
 An **action** is the combination of controller inputs the bot presses (throttle, steer, jump, boost, etc.), and an action parser converts the outputs of the bot's brain into these controller inputs.
 
